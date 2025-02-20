@@ -6,9 +6,9 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="streamify-theme">
       <div className="min-h-screen bg-background">
-        <DashboardLayout>
+        {/* <DashboardLayout> */}
           <Dashboard />
-        </DashboardLayout>
+        {/* </DashboardLayout> */}
       </div>
     </ThemeProvider>
   )

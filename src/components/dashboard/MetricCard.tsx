@@ -1,4 +1,4 @@
-import { Card } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -10,34 +10,42 @@ interface MetricCardProps {
     value: number;
     isPositive: boolean;
   };
+  iconColor?: string;
+  iconBgColor?: string;
 }
 
-const MetricCard = ({ title, value, icon: Icon, trend }: MetricCardProps) => {
+const MetricCard = ({ 
+  title, 
+  value, 
+  icon: Icon, 
+  trend,
+  iconColor = "text-indigo-600 dark:text-indigo-400",
+  iconBgColor = "bg-indigo-100 dark:bg-indigo-900/30"
+}: MetricCardProps) => {
   return (
-    <Card className="p-6 transition-all hover:shadow-md">
-      <div className="flex items-center justify-between">
-        <div className="space-y-1">
-          <div className="flex items-center space-x-2">
-            <Icon className="h-4 w-4 text-muted-foreground" />
-            <p className="text-sm font-medium text-muted-foreground">{title}</p>
-          </div>
-          <div className="flex items-baseline space-x-2">
-            <h3 className="text-2xl font-bold text-card-foreground">{value}</h3>
+    <Card className="bg-white dark:bg-slate-800 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+      <CardContent className="p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm text-slate-500 dark:text-slate-400">{title}</p>
+            <h3 className="text-2xl font-bold mt-1">{value}</h3>
             {trend && (
-              <span 
-                className={cn(
-                  "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium",
-                  trend.isPositive 
-                    ? "bg-green-500/15 text-green-500" 
-                    : "bg-red-500/15 text-red-500"
-                )}
-              >
-                {trend.isPositive ? '↑' : '↓'} {Math.abs(trend.value)}%
-              </span>
+              <p className={cn(
+                "text-xs mt-1",
+                trend.isPositive ? "text-green-500" : "text-red-500"
+              )}>
+                {trend.isPositive ? '+' : '-'}{trend.value}% since last month
+              </p>
             )}
           </div>
+          <div className={cn(
+            "h-12 w-12 rounded-full flex items-center justify-center",
+            iconBgColor
+          )}>
+            <Icon className={cn("h-6 w-6", iconColor)} />
+          </div>
         </div>
-      </div>
+      </CardContent>
     </Card>
   );
 };
