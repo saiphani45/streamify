@@ -31,6 +31,15 @@ const LineChartGraph = ({
   const Chart = areaChart ? AreaChart : LineChart;
   const DataElement = areaChart ? Area : Line;
 
+  // Format date to show only month and year
+  const formatXAxis = (tickItem: string) => {
+    const date = new Date(tickItem);
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      year: "2-digit",
+    });
+  };
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <Chart data={data}>
@@ -61,12 +70,17 @@ const LineChartGraph = ({
           tickLine={false}
           tick={{ fill: "#94a3b8", fontSize: 12 }}
           dy={10}
+          tickFormatter={formatXAxis}
+          interval="preserveStartEnd"
         />
         <YAxis
           axisLine={false}
           tickLine={false}
           tick={{ fill: "#94a3b8", fontSize: 12 }}
           dx={-10}
+          tickFormatter={(value) =>
+            value >= 1000 ? `${(value / 1000).toFixed(0)}k` : value
+          }
         />
         <Tooltip
           content={

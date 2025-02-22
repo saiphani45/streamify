@@ -91,15 +91,20 @@ const generateRandomStreams = (count: number): Stream[] => {
 };
 
 // User growth data with consistent progression
-export const userGrowthData: UserGrowth[] = [
-  { month: "2024-01", totalUsers: 20000, activeUsers: 15000 },
-  { month: "2024-02", totalUsers: 25000, activeUsers: 18750 },
-  { month: "2024-03", totalUsers: 31250, activeUsers: 23400 },
-  { month: "2024-04", totalUsers: 39000, activeUsers: 29250 },
-  { month: "2024-05", totalUsers: 48750, activeUsers: 36500 },
-  { month: "2024-06", totalUsers: 61000, activeUsers: 45750 },
+export const userGrowthData = [
+  { month: "2024-02", totalUsers: 10000, activeUsers: 7500 },
+  { month: "2024-03", totalUsers: 12500, activeUsers: 9375 },
+  { month: "2024-04", totalUsers: 15625, activeUsers: 11700 },
+  { month: "2024-05", totalUsers: 19500, activeUsers: 14625 },
+  { month: "2024-06", totalUsers: 24375, activeUsers: 18250 },
+  { month: "2024-07", totalUsers: 30500, activeUsers: 22875 },
+  { month: "2024-08", totalUsers: 38125, activeUsers: 28600 },
+  { month: "2024-09", totalUsers: 47650, activeUsers: 35750 },
+  { month: "2024-10", totalUsers: 51000, activeUsers: 38250 },
+  { month: "2024-11", totalUsers: 55000, activeUsers: 41250 },
+  { month: "2024-12", totalUsers: 58000, activeUsers: 43500 },
+  { month: "2025-01", totalUsers: 61000, activeUsers: 45750 }
 ];
-
 // Revenue data with realistic proportions
 export const revenueData: Revenue = {
   Subscriptions: 1250000,
