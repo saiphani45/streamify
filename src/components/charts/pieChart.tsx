@@ -47,13 +47,11 @@ const PieChartGraph = ({
     };
   }, []);
 
-  // Calculate total using object values
   const totalValue = (Object.values(data) as number[]).reduce(
     (a, b) => a + b,
     0
   );
 
-  // Format data for the chart
   const formattedData: ChartData[] = Object.entries(data).map(
     ([name, value]) => ({
       name,
@@ -78,9 +76,9 @@ const PieChartGraph = ({
               startAngle={90}
               endAngle={-270}
             >
-              {formattedData.map((index: any) => (
+              {formattedData.map((entry, index) => (
                 <Cell
-                  key={`cell-${index}`}
+                  key={`cell-${entry.name}`}
                   fill={colors[index % colors.length]}
                   stroke="none"
                   className="pie-sector"
@@ -95,7 +93,7 @@ const PieChartGraph = ({
       <div className="mt-4 space-y-2">
         {formattedData.map((entry, index) => (
           <div
-            key={index}
+            key={`legend-${entry.name}`}
             className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
           >
             <div className="flex items-center gap-2">

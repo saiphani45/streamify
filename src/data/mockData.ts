@@ -236,7 +236,7 @@ export const enhancedUserData = [
 export const streamingData = [
   { name: "Pop", streams: 4500, growth: 15 },
   { name: "Hip Hop", streams: 3800, growth: 22 },
-  { name: "Rock", streams: 3200, growth: 8 },
+  { name: "Rock", streams: 3200, growth: -8 },
   { name: "Electronic", streams: 2900, growth: 18 },
   { name: "R&B", streams: 2600, growth: 12 },
 ];

@@ -79,7 +79,6 @@ const ProfileDialog = ({ user, isOpen, onClose }: any) => {
             <Button variant="outline" onClick={onClose}>
               Close
             </Button>
-            <Button>Edit Profile</Button>
           </div>
         </div>
       </DialogContent>

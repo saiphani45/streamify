@@ -20,8 +20,6 @@ const AddArtistDialog = ({ isOpen, onClose }: AddArtistDialogProps) => {
   const [formData, setFormData] = useState({
     name: "",
     image: "",
-    monthlyListeners: 0,
-    totalStreams: 0,
     genres: "",
     topSongs: "",
   });
@@ -32,8 +30,6 @@ const AddArtistDialog = ({ isOpen, onClose }: AddArtistDialogProps) => {
     addArtist({
       name: formData.name,
       image: formData.image,
-      monthlyListeners: Number(formData.monthlyListeners),
-      totalStreams: Number(formData.totalStreams),
       genres: formData.genres.split(",").map((g) => g.trim()),
       topSongs: formData.topSongs.split(",").map((s) => s.trim()),
       joinedDate: new Date().toISOString(),
@@ -42,8 +38,6 @@ const AddArtistDialog = ({ isOpen, onClose }: AddArtistDialogProps) => {
     setFormData({
       name: "",
       image: "",
-      monthlyListeners: 0,
-      totalStreams: 0,
       genres: "",
       topSongs: "",
     });
@@ -92,44 +86,6 @@ const AddArtistDialog = ({ isOpen, onClose }: AddArtistDialogProps) => {
                 className="bg-white/50 dark:bg-slate-900/50"
                 required
               />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="monthlyListeners">Monthly Listeners</Label>
-                <Input
-                  id="monthlyListeners"
-                  type="number"
-                  value={formData.monthlyListeners}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      monthlyListeners: Number(e.target.value),
-                    }))
-                  }
-                  placeholder="Enter monthly listeners"
-                  className="bg-white/50 dark:bg-slate-900/50"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="totalStreams">Total Streams</Label>
-                <Input
-                  id="totalStreams"
-                  type="number"
-                  value={formData.totalStreams}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      totalStreams: Number(e.target.value),
-                    }))
-                  }
-                  placeholder="Enter total streams"
-                  className="bg-white/50 dark:bg-slate-900/50"
-                  required
-                />
-              </div>
             </div>
 
             <div className="space-y-2">

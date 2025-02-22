@@ -24,3 +24,26 @@ export const CustomTooltip = ({ active, payload, label }: any) => {
   }
   return null;
 };
+
+export const LoadingFallback = () => (
+  <div
+    className="min-h-screen bg-gradient-to-br from-sky-50 via-slate-50 to-teal-50/50 
+    dark:from-slate-900 dark:via-slate-900/95 dark:to-slate-800/90 
+    dark:bg-blend-multiply flex items-center justify-center"
+  >
+    <div className="relative">
+      <div
+        className="animate-spin rounded-full h-16 w-16 border-4 border-t-sky-500 
+        border-r-slate-200 border-b-teal-500 border-l-slate-200
+        dark:border-t-sky-400 dark:border-r-slate-700 
+        dark:border-b-teal-400 dark:border-l-slate-700"
+      />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div
+          className="h-8 w-8 rounded-full bg-gradient-to-br from-sky-50 via-slate-50 to-teal-50/50 
+          dark:from-slate-900 dark:via-slate-900/95 dark:to-slate-800/90"
+        />
+      </div>
+    </div>
+  </div>
+);
