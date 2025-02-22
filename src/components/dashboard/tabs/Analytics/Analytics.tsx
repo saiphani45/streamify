@@ -2,9 +2,9 @@ import { CardContent } from "@/components/ui/card";
 import Card3D from "@/components/ui/Card3d";
 import { TabsContent } from "@/components/ui/tabs";
 import { streamingData, userStatusData } from "@/data/mockData";
-import LineChartGraph from "@/components/charts/lineChart";
+import LineChartGraph from "@/components/charts/LineChartGraph";
 import { genreConfigs, userStatusConfigs } from "@/lib/constants";
-import GenericChart from "@/components/charts/genericChart";
+import GenericChart from "@/components/charts/GenericChart";
 
 interface StreamingData {
   name: string;

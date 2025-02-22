@@ -13,12 +13,11 @@ import {
   userGrowthData,
 } from "@/data/mockData";
 import { userGrowthlineConfigs } from "@/lib/constants";
-import PieChartGraph from "@/components/charts/pieChart";
-import LineChartGraph from "@/components/charts/lineChart";
+import PieChartGraph from "@/components/charts/PieChartGraph";
+import LineChartGraph from "@/components/charts/LineChartGraph";
 import { columns } from "@/components/utils/utils";
 
 const OverviewTab = () => {
-
   return (
     <TabsContent value="overview" className="space-y-6">
       <MetricCards />
