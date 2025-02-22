@@ -4,7 +4,7 @@ import { TabsContent } from "@/components/ui/tabs";
 import { streamingData, userStatusData } from "@/data/mockData";
 import LineChartGraph from "@/components/charts/LineChartGraph";
 import { genreConfigs, userStatusConfigs } from "@/lib/constants";
-import GenericChart from "@/components/charts/GenericChart";
+import GenericChart from "@/components/charts/genericChart";
 
 interface StreamingData {
   name: string;
