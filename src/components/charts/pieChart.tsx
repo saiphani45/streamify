@@ -78,7 +78,7 @@ const PieChartGraph = ({
               startAngle={90}
               endAngle={-270}
             >
-              {formattedData.map((entry, index) => (
+              {formattedData.map((index: any) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={colors[index % colors.length]}

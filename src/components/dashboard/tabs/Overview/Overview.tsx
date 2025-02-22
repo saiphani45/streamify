@@ -1,7 +1,7 @@
-import { Card, CardContent } from "@/components/ui/card";
+import {CardContent } from "@/components/ui/card";
 import Card3D from "@/components/ui/Card3d";
 import { TabsContent } from "@/components/ui/tabs";
-import { cn, formatCurrency } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils";
 import { Avatar } from "@/components/ui/avatar";
 import GenericTable from "@/components/tables/genericTable";
 import MetricCards from "../../MetricCards";
@@ -14,7 +14,7 @@ import {
 } from "@/data/mockData";
 import { userGrowthlineConfigs } from "@/lib/constants";
 import PieChartGraph from "@/components/charts/pieChart";
-import LineChartGraph from "@/components/charts/LineChart";
+import LineChartGraph from "@/components/charts/lineChart";
 
 const OverviewTab = () => {
   const columns = [

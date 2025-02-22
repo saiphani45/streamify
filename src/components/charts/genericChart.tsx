@@ -64,7 +64,7 @@ const GenericChart = ({
       );
     }
 
-    const DataElement = type === "bar" ? Bar : Area;
+    const DataElement: any = type === "bar" ? Bar : Area;
     return (
       <DataElement
         {...commonProps}

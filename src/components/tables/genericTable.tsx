@@ -26,7 +26,6 @@ const GenericTable = ({
   itemsPerPage = 10,
   className = "",
   showFilters = true,
-  filterPlaceholder = "Filter...",
 }: TableProps) => {
   // State for sorting and filtering
   const [sortColumn, setSortColumn] = useState("");
