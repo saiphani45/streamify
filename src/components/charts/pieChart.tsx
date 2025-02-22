@@ -1,47 +1,123 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
-import { COLORS } from "@/lib/constants";
 import { formatCurrency } from "@/lib/utils";
+import { useEffect } from "react";
+import { CustomTooltip } from "../utils/utils";
 
-const PieChartGraph = ({ revenueData }: any) => {
-  const formattedRevenueData = [
-    { name: "Subscriptions", value: revenueData.Subscriptions },
-    { name: "Advertisements", value: revenueData.Advertisements },
-  ];
+interface Revenue {
+  Subscriptions: number;
+  Advertisements: number;
+}
+
+interface PieChartGraphProps {
+  data: Revenue;
+  colors?: string[];
+  formatValue?: (value: number) => string;
+  innerRadius?: number;
+  outerRadius?: number;
+}
+
+interface ChartData {
+  name: string;
+  value: number;
+  percentage: string;
+}
+
+const PieChartGraph = ({
+  data,
+  colors = ["#0ea5e9", "#14b8a6", "#f43f5e", "#a855f7"],
+  formatValue = formatCurrency,
+  innerRadius = 60,
+  outerRadius = 80,
+}: PieChartGraphProps) => {
+  useEffect(() => {
+    const style = document.createElement("style");
+    style.textContent = `
+      .pie-sector {
+        transition: transform 0.3s ease;
+        transform-origin: center center;
+      }
+      .pie-sector:hover {
+        transform: scale(1.03);
+        filter: brightness(0.9);
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
+  // Calculate total using object values
+  const totalValue = (Object.values(data) as number[]).reduce(
+    (a, b) => a + b,
+    0
+  );
+
+  // Format data for the chart
+  const formattedData: ChartData[] = Object.entries(data).map(
+    ([name, value]) => ({
+      name,
+      value,
+      percentage: ((value / totalValue) * 100).toFixed(1),
+    })
+  );
 
   return (
-    <div className="w-full h-full min-h-[300px]">
-      <ResponsiveContainer width="100%" height="100%" minHeight={300}>
-        <PieChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-          <Pie
-            data={formattedRevenueData}
-            cx="50%"
-            cy="50%"
-            innerRadius={60}
-            outerRadius={100}
-            paddingAngle={2}
-            dataKey="value"
-            label={({ name, value }) => `${name}: ${formatCurrency(value)}`}
+    <div className="w-full h-full flex flex-col">
+      <div className="flex-1" style={{ minHeight: "200px" }}>
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={formattedData}
+              cx="50%"
+              cy="50%"
+              innerRadius={innerRadius}
+              outerRadius={outerRadius}
+              paddingAngle={5}
+              dataKey="value"
+              startAngle={90}
+              endAngle={-270}
+            >
+              {formattedData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={colors[index % colors.length]}
+                  stroke="none"
+                  className="pie-sector"
+                  id={`pie-sector-${index}`}
+                />
+              ))}
+            </Pie>
+            <Tooltip content={<CustomTooltip />} />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+      <div className="mt-4 space-y-2">
+        {formattedData.map((entry, index) => (
+          <div
+            key={index}
+            className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
           >
-            {formattedRevenueData.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-                stroke="white"
-                strokeWidth={2}
+            <div className="flex items-center gap-2">
+              <span
+                className="w-3 h-3 rounded-full"
+                style={{ backgroundColor: colors[index % colors.length] }}
               />
-            ))}
-          </Pie>
-          <Tooltip
-            formatter={(value) => formatCurrency(value)}
-            contentStyle={{
-              backgroundColor: "rgba(255, 255, 255, 0.95)",
-              borderRadius: "12px",
-              border: "1px solid #e2e8f0",
-              boxShadow: "0 8px 30px rgba(0,0,0,0.12)",
-            }}
-          />
-        </PieChart>
-      </ResponsiveContainer>
+              <span className="text-sm text-slate-700 dark:text-slate-300">
+                {entry.name}
+              </span>
+            </div>
+            <div className="flex flex-col items-end">
+              <span className="text-sm font-medium text-slate-900 dark:text-white">
+                {formatValue(entry.value)}
+              </span>
+              <span className="text-xs text-slate-500">
+                {entry.percentage}%
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

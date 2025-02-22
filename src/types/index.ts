@@ -12,9 +12,12 @@ export interface Revenue {
 export interface Artist {
   id: string;
   name: string;
+  image: string;
   monthlyListeners: number;
   totalStreams: number;
-  image: string;
+  genres?: string[];
+  topSongs?: string[];
+  joinedDate?: string;
 }
 
 // Update your Song interface to include artist image

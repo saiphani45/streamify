@@ -1,22 +1,22 @@
-import LineChartGraph from "@/components/charts/LineChart";
-import PieChartGraph from "@/components/charts/pieChart";
-import GenericTable from "@/components/tables/genericTable";
 import { CardContent } from "@/components/ui/card";
 import Card3D from "@/components/ui/Card3d";
+import { TabsContent } from "@/components/ui/tabs";
+import { formatCurrency } from "@/lib/utils";
+import { Avatar } from "@/components/ui/avatar";
+import GenericTable from "@/components/tables/genericTable";
+import MetricCards from "../../MetricCards";
 import {
-  userGrowthData,
-  keyMetrics,
-  revenueData,
   artists,
+  keyMetrics,
   recentStreamsData,
+  revenueData,
+  userGrowthData,
 } from "@/data/mockData";
 import { userGrowthlineConfigs } from "@/lib/constants";
-import { formatCurrency } from "@/lib/utils";
-import { Avatar } from "@radix-ui/react-avatar";
-import { TabsContent } from "@radix-ui/react-tabs";
-import MetricCards from "../MetricCards";
+import PieChartGraph from "@/components/charts/pieChart";
+import LineChartGraph from "@/components/charts/LineChart";
 
-const OverViewTab = () => {
+const OverviewTab = () => {
   const columns = [
     {
       key: "songName",
@@ -27,11 +27,14 @@ const OverViewTab = () => {
         <div className="flex items-center gap-3">
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-br from-sky-500 to-teal-500 rounded-full blur-sm opacity-50" />
-            <Avatar className="h-8 w-8 ring-2 ring-sky-100 dark:ring-sky-900 relative">
+            <Avatar className="h-8 w-8 ring-2 ring-sky-100 dark:ring-sky-900 relative overflow-hidden">
               <img
                 src={row.artistImage}
                 alt={row.artist}
-                className="object-cover"
+                className="object-cover w-8 h-8"
+                loading="lazy"
+                width="32"
+                height="32"
               />
             </Avatar>
           </div>
@@ -70,7 +73,7 @@ const OverViewTab = () => {
       render: (value: any) => (
         <span
           className="bg-gradient-to-r from-sky-600 to-teal-600 
-              dark:from-sky-400 dark:to-teal-400 bg-clip-text text-transparent font-medium"
+            dark:from-sky-400 dark:to-teal-400 bg-clip-text text-transparent font-medium"
         >
           {value.toLocaleString()}
         </span>
@@ -82,7 +85,7 @@ const OverViewTab = () => {
       render: (value: any) => (
         <span
           className="px-2 py-1 rounded-full bg-sky-50 dark:bg-sky-900/30 
-              text-sky-600 dark:text-sky-400 text-xs"
+            text-sky-600 dark:text-sky-400 text-xs"
         >
           {value}
         </span>
@@ -94,16 +97,14 @@ const OverViewTab = () => {
     <TabsContent value="overview" className="space-y-6">
       <MetricCards />
 
-      {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* User Growth Chart */}
         <Card3D className="lg:col-span-2">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h3
                   className="text-lg font-semibold bg-gradient-to-r from-sky-600 to-teal-600 
-                        dark:from-sky-400 dark:to-teal-400 bg-clip-text text-transparent"
+                    dark:from-sky-400 dark:to-teal-400 bg-clip-text text-transparent"
                 >
                   User Growth
                 </h3>
@@ -114,21 +115,21 @@ const OverViewTab = () => {
             </div>
             <div className="h-[300px] relative z-10">
               <LineChartGraph
-                userGrowthData={userGrowthData}
+                data={userGrowthData}
                 lineConfigs={userGrowthlineConfigs}
+                areaChart={true}
               />
             </div>
           </CardContent>
         </Card3D>
 
-        {/* Revenue Distribution */}
         <Card3D>
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h3
                   className="text-lg font-semibold bg-gradient-to-r from-sky-600 to-teal-600 
-                        dark:from-sky-400 dark:to-teal-400 bg-clip-text text-transparent"
+                    dark:from-sky-400 dark:to-teal-400 bg-clip-text text-transparent"
                 >
                   Revenue Distribution
                 </h3>
@@ -141,17 +142,21 @@ const OverViewTab = () => {
               </div>
             </div>
             <div className="h-[300px] relative z-10">
-              <PieChartGraph revenueData={revenueData} />
+              <PieChartGraph
+                data={revenueData}
+                colors={["#0ea5e9", "#14b8a6"]}
+                innerRadius={60}
+                outerRadius={80}
+              />
             </div>
           </CardContent>
         </Card3D>
 
-        {/* Top Artists */}
         <Card3D>
           <CardContent className="p-6">
             <h3
               className="text-lg font-semibold mb-4 bg-gradient-to-r from-sky-600 to-teal-600 
-                    dark:from-sky-400 dark:to-teal-400 bg-clip-text text-transparent"
+                dark:from-sky-400 dark:to-teal-400 bg-clip-text text-transparent"
             >
               Top Artists
             </h3>
@@ -160,7 +165,7 @@ const OverViewTab = () => {
                 <div
                   key={artist.id}
                   className="flex items-center justify-between p-3 rounded-lg 
-                          hover:bg-sky-50/50 dark:hover:bg-sky-900/20 transition-colors"
+                      hover:bg-sky-50/50 dark:hover:bg-sky-900/20 transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <span className="text-sm text-sky-500 dark:text-sky-400 w-4">
@@ -168,11 +173,14 @@ const OverViewTab = () => {
                     </span>
                     <div className="relative">
                       <div className="absolute inset-0 bg-gradient-to-br from-sky-500 to-teal-500 rounded-full blur-sm opacity-50" />
-                      <Avatar className="h-10 w-10 ring-2 ring-sky-100 dark:ring-sky-900 relative">
+                      <Avatar className="h-10 w-10 ring-2 ring-sky-100 dark:ring-sky-900 relative overflow-hidden">
                         <img
                           src={artist.image}
                           alt={artist.name}
-                          className="object-cover"
+                          className="object-cover w-10 h-10"
+                          loading="lazy"
+                          width="40"
+                          height="40"
                         />
                       </Avatar>
                     </div>
@@ -189,7 +197,7 @@ const OverViewTab = () => {
                   <div className="text-right">
                     <p
                       className="font-medium bg-gradient-to-r from-sky-600 to-teal-600 
-                            dark:from-sky-400 dark:to-teal-400 bg-clip-text text-transparent"
+                          dark:from-sky-400 dark:to-teal-400 bg-clip-text text-transparent"
                     >
                       {(artist.totalStreams / 1000000000).toFixed(1)}B
                     </p>
@@ -204,13 +212,12 @@ const OverViewTab = () => {
         </Card3D>
       </div>
 
-      {/* Recent Streams Table */}
       <Card3D>
         <CardContent className="p-6">
           <div className="flex items-center justify-between mb-4">
             <h3
               className="text-lg font-semibold bg-gradient-to-r from-sky-600 to-teal-600 
-            dark:from-sky-400 dark:to-teal-400 bg-clip-text text-transparent"
+                dark:from-sky-400 dark:to-teal-400 bg-clip-text text-transparent"
             >
               Recent Streams
             </h3>
@@ -227,4 +234,4 @@ const OverViewTab = () => {
   );
 };
 
-export default OverViewTab;
+export default OverviewTab;

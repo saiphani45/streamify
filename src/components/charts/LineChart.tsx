@@ -7,58 +7,111 @@ import {
   Legend,
   Line,
   LineChart,
+  Area,
+  AreaChart,
 } from "recharts";
+import { CustomTooltip } from "../utils/utils";
 
 interface LineChartGraphProps {
-  userGrowthData: any[];
+  data: any[];
   lineConfigs: Array<{
-    activeDot: any;
+    activeDot?: any;
     dataKey: string;
     stroke: string;
+    name?: string;
   }>;
+  areaChart?: boolean;
 }
 
 const LineChartGraph = ({
-  userGrowthData,
+  data,
   lineConfigs,
+  areaChart = false,
 }: LineChartGraphProps) => {
+  const Chart = areaChart ? AreaChart : LineChart;
+  const DataElement = areaChart ? Area : Line;
+
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={userGrowthData}>
+      <Chart data={data}>
         <defs>
-          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0} />
-          </linearGradient>
-          <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#14b8a6" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#14b8a6" stopOpacity={0} />
-          </linearGradient>
+          {lineConfigs.map((config, index) => (
+            <linearGradient
+              key={`gradient-${index}`}
+              id={`gradient-${config.dataKey}`}
+              x1="0"
+              y1="0"
+              x2="0"
+              y2="1"
+            >
+              <stop offset="5%" stopColor={config.stroke} stopOpacity={0.3} />
+              <stop offset="95%" stopColor={config.stroke} stopOpacity={0} />
+            </linearGradient>
+          ))}
         </defs>
-        <CartesianGrid strokeDasharray="3 3" className="opacity-30" />
-        <XAxis dataKey="month" stroke="#94a3b8" />
-        <YAxis stroke="#94a3b8" />
-        <Tooltip
-          contentStyle={{
-            backgroundColor: "rgba(255, 255, 255, 0.95)",
-            borderRadius: "12px",
-            border: "1px solid #e2e8f0",
-            boxShadow: "0 8px 30px rgba(0,0,0,0.12)",
-          }}
+        <CartesianGrid
+          strokeDasharray="3 3"
+          stroke="#94a3b8"
+          opacity={0.1}
+          vertical={false}
         />
-        <Legend />
+        <XAxis
+          dataKey="month"
+          axisLine={false}
+          tickLine={false}
+          tick={{ fill: "#94a3b8", fontSize: 12 }}
+          dy={10}
+        />
+        <YAxis
+          axisLine={false}
+          tickLine={false}
+          tick={{ fill: "#94a3b8", fontSize: 12 }}
+          dx={-10}
+        />
+        <Tooltip
+          content={
+            <CustomTooltip
+              active={undefined}
+              payload={undefined}
+              label={undefined}
+            />
+          }
+        />
+        <Legend
+          verticalAlign="top"
+          height={36}
+          iconType="circle"
+          formatter={(value) => (
+            <span className="text-sm text-slate-700 dark:text-slate-300">
+              {value}
+            </span>
+          )}
+        />
 
         {lineConfigs.map((config) => (
-          <Line
+          <DataElement
             key={config.dataKey}
             type="monotone"
             dataKey={config.dataKey}
+            name={config.name || config.dataKey}
             stroke={config.stroke}
-            fill="url(#colorPv)"
-            activeDot={config.activeDot}
+            fill={areaChart ? `url(#gradient-${config.dataKey})` : "none"}
+            activeDot={{
+              r: 6,
+              strokeWidth: 2,
+              fill: config.stroke,
+              stroke: "#fff",
+            }}
+            strokeWidth={2}
+            dot={{
+              r: 4,
+              fill: config.stroke,
+              strokeWidth: 2,
+              stroke: "#fff",
+            }}
           />
         ))}
-      </LineChart>
+      </Chart>
     </ResponsiveContainer>
   );
 };

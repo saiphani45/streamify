@@ -1,17 +1,17 @@
-import { ThemeProvider } from "./components/layout/theme-provider"
-import { DashboardLayout } from "@/components/layout/DashboardLayout"
-import Dashboard from "@/components/dashboard/Dashboard"
+import { ThemeProvider } from "./components/layout/theme-provider";
+import Dashboard from "@/components/dashboard/Dashboard";
+import { ArtistProvider } from "./context/artistContext";
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="streamify-theme">
-      <div className="min-h-screen bg-background">
-        {/* <DashboardLayout> */}
+    <ArtistProvider>
+      <ThemeProvider defaultTheme="dark" storageKey="streamify-theme">
+        <div className="min-h-screen bg-background">
           <Dashboard />
-        {/* </DashboardLayout> */}
-      </div>
-    </ThemeProvider>
-  )
+        </div>
+      </ThemeProvider>
+    </ArtistProvider>
+  );
 }
 
-export default App
+export default App;

@@ -2,10 +2,10 @@ import { Tabs } from "@/components/ui/tabs";
 
 import Header from "../nav/Header";
 import TabsLists from "./tabs/TabsList";
-import OverViewTab from "./tabs/Overview";
-import ArtistsTab from "./tabs/Artists";
-import UsersTab from "./tabs/Users";
-import AnalyticsTab from "./tabs/Analytics";
+import OverViewTab from "./tabs/Overview/Overview";
+import ArtistsTab from "./tabs/Artists/Artists";
+import UsersTab from "./tabs/Users/Users";
+import AnalyticsTab from "./tabs/Analytics/Analytics";
 
 const Dashboard = () => {
   return (
