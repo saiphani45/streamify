@@ -5,7 +5,6 @@ import { streamingData, userStatusData } from "@/data/mockData";
 import LineChartGraph from "@/components/charts/LineChartGraph";
 import { genreConfigs, userStatusConfigs } from "@/lib/constants";
 import GenericChart from "@/components/charts/GenericChart";
-
 interface StreamingData {
   name: string;
   streams: number;
