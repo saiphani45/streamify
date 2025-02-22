@@ -13,6 +13,9 @@ interface StreamingData {
 }
 
 const AnalyticsTab = () => {
+  // Calculate max streams for proper progress bar scaling
+  const maxStreams = Math.max(...streamingData.map((genre) => genre.streams));
+
   return (
     <TabsContent value="analytics" className="space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -96,7 +99,7 @@ const AnalyticsTab = () => {
                     <div
                       className="h-full bg-gradient-to-r from-sky-500 to-teal-500"
                       style={{
-                        width: `${(genre.streams / 5000) * 100}%`,
+                        width: `${(genre.streams / maxStreams) * 100}%`,
                       }}
                     />
                   </div>

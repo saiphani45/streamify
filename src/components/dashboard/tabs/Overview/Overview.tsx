@@ -18,6 +18,7 @@ import LineChartGraph from "@/components/charts/lineChart";
 import { columns } from "@/components/utils/utils";
 
 const OverviewTab = () => {
+
   return (
     <TabsContent value="overview" className="space-y-6">
       <MetricCards />
@@ -114,8 +115,10 @@ const OverviewTab = () => {
                         {artist.name}
                       </p>
                       <p className="text-sm text-sky-600/60 dark:text-sky-400/60">
-                        {((artist as any).monthlyListeners / 1000000).toFixed(1)}M
-                        monthly listeners
+                        {((artist as any).monthlyListeners / 1000000).toFixed(
+                          1
+                        )}
+                        M monthly listeners
                       </p>
                     </div>
                   </div>

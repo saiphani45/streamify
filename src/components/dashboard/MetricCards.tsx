@@ -23,8 +23,8 @@ const MetricCards = () => {
   );
 
   // Find top artist
-  const topArtist: any = artists.find(
-    (artist) => artist.name === keyMetrics.topArtist
+  const topArtist = artists.reduce((prev: any, current: any) =>
+    prev.monthlyListeners > current.monthlyListeners ? prev : current
   );
 
   const metrics = [
@@ -66,12 +66,12 @@ const MetricCards = () => {
     },
     {
       title: "Top Artist",
-      value: topArtist?.name || keyMetrics.topArtist,
+      value: topArtist?.name || (keyMetrics as any).topArtist,
       icon: Trophy,
       iconColor: "text-pink-600 dark:text-pink-400",
       iconBgColor: "bg-pink-100 dark:bg-pink-900/30",
       image: topArtist?.image,
-      subtitle: `${(topArtist?.monthlyListeners / 1000000).toFixed(
+      subtitle: `${((topArtist as any)?.monthlyListeners / 1000000).toFixed(
         1
       )}M monthly listeners`,
     },
