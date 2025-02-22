@@ -11,7 +11,8 @@ const Dashboard = () => {
   return (
     <div
       className="min-h-screen bg-gradient-to-br from-sky-50 via-slate-50 to-teal-50/50 
-      dark:from-slate-950 dark:via-sky-950/20 dark:to-teal-950/20 p-4 lg:p-6"
+  dark:from-slate-900 dark:via-slate-900/95 dark:to-slate-800/90 
+  dark:bg-blend-multiply p-4 lg:p-6"
     >
       {/* Header */}
       <Header />

@@ -5,44 +5,52 @@ const TabsLists = () => {
   return (
     <div className="flex justify-center w-full">
       <TabsList
-        className="grid grid-cols-2 lg:grid-cols-4 gap-2 bg-white/50 dark:bg-slate-900/50 
-      p-1 rounded-xl border border-sky-100 dark:border-sky-900/50"
+        className="grid grid-cols-2 lg:grid-cols-4 gap-2 w-full max-w-2xl 
+        bg-white/50 dark:bg-slate-900/50 backdrop-blur
+        p-1.5 rounded-xl border border-sky-100 dark:border-sky-900"
       >
         <TabsTrigger
           value="overview"
-          className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r 
-          data-[state=active]:from-sky-500 data-[state=active]:to-teal-500 
-          data-[state=active]:text-white rounded-lg"
+          className="flex items-center justify-center gap-2 px-3 py-2
+            data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-500 data-[state=active]:to-teal-500 
+            data-[state=active]:text-white data-[state=inactive]:text-slate-600 
+            dark:data-[state=inactive]:text-slate-400 rounded-lg transition-colors"
         >
           <LayoutDashboard className="h-4 w-4" />
-          Overview
+          <span>Overview</span>
         </TabsTrigger>
+
         <TabsTrigger
           value="artists"
-          className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r 
-          data-[state=active]:from-sky-500 data-[state=active]:to-teal-500 
-          data-[state=active]:text-white rounded-lg"
+          className="flex items-center justify-center gap-2 px-3 py-2
+            data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-500 data-[state=active]:to-teal-500 
+            data-[state=active]:text-white data-[state=inactive]:text-slate-600 
+            dark:data-[state=inactive]:text-slate-400 rounded-lg transition-colors"
         >
           <Music2 className="h-4 w-4" />
-          Artists
+          <span>Artists</span>
         </TabsTrigger>
+
         <TabsTrigger
           value="users"
-          className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r 
-          data-[state=active]:from-sky-500 data-[state=active]:to-teal-500 
-          data-[state=active]:text-white rounded-lg"
+          className="flex items-center justify-center gap-2 px-3 py-2
+            data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-500 data-[state=active]:to-teal-500 
+            data-[state=active]:text-white data-[state=inactive]:text-slate-600 
+            dark:data-[state=inactive]:text-slate-400 rounded-lg transition-colors"
         >
           <Users className="h-4 w-4" />
-          Users
+          <span>Users</span>
         </TabsTrigger>
+
         <TabsTrigger
           value="analytics"
-          className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r 
-          data-[state=active]:from-sky-500 data-[state=active]:to-teal-500 
-          data-[state=active]:text-white rounded-lg"
+          className="flex items-center justify-center gap-2 px-3 py-2
+            data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-500 data-[state=active]:to-teal-500 
+            data-[state=active]:text-white data-[state=inactive]:text-slate-600 
+            dark:data-[state=inactive]:text-slate-400 rounded-lg transition-colors"
         >
           <TrendingUp className="h-4 w-4" />
-          Analytics
+          <span>Analytics</span>
         </TabsTrigger>
       </TabsList>
     </div>

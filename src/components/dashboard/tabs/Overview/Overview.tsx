@@ -1,7 +1,7 @@
-import { CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import Card3D from "@/components/ui/Card3d";
 import { TabsContent } from "@/components/ui/tabs";
-import { formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 import { Avatar } from "@/components/ui/avatar";
 import GenericTable from "@/components/tables/genericTable";
 import MetricCards from "../../MetricCards";

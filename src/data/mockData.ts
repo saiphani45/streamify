@@ -1,5 +1,47 @@
 import { UserGrowth, Revenue, Song, Stream, Artist } from "../types";
 
+// Generate random recent streams
+const generateRandomStreams = (count: number): Stream[] => {
+  const streams: Stream[] = [];
+
+  for (let i = 0; i < count; i++) {
+    const randomSong =
+      topSongsData[Math.floor(Math.random() * topSongsData.length)];
+    streams.push({
+      id: `stream-${i + 1}`,
+      songName: randomSong.name.split(" - ")[0],
+      artist: randomSong.artist,
+      artistImage: randomSong.artistImage,
+      dateStreamed: new Date(
+        Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000
+      ).toISOString(),
+      streamCount: Math.floor(Math.random() * 1000) + 1,
+      userId: `user-${Math.floor(Math.random() * 10000) + 1}`,
+    });
+  }
+
+  return streams.sort(
+    (a, b) =>
+      new Date(b.dateStreamed).getTime() - new Date(a.dateStreamed).getTime()
+  );
+};
+
+// Function to generate random avatar URL
+const getRandomAvatar = (userId: string) => {
+  const styles = [
+    "adventurer",
+    "adventurer-neutral",
+    "avataaars",
+    "big-ears",
+    "big-smile",
+    "bottts",
+    "croodles",
+    "fun-emoji",
+  ];
+  const randomStyle = styles[Math.floor(Math.random() * styles.length)];
+  return `https://api.dicebear.com/7.x/${randomStyle}/svg?seed=${userId}`;
+};
+
 export const userGrowthData: UserGrowth[] = [
   {
     month: "2024-03",
@@ -148,32 +190,6 @@ export const topSongsData: Song[] = [
   },
 ];
 
-// Generate random recent streams
-const generateRandomStreams = (count: number): Stream[] => {
-  const streams: Stream[] = [];
-
-  for (let i = 0; i < count; i++) {
-    const randomSong =
-      topSongsData[Math.floor(Math.random() * topSongsData.length)];
-    streams.push({
-      id: `stream-${i + 1}`,
-      songName: randomSong.name.split(" - ")[0],
-      artist: randomSong.artist,
-      artistImage: randomSong.artistImage,
-      dateStreamed: new Date(
-        Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000
-      ).toISOString(),
-      streamCount: Math.floor(Math.random() * 1000) + 1,
-      userId: `user-${Math.floor(Math.random() * 10000) + 1}`,
-    });
-  }
-
-  return streams.sort(
-    (a, b) =>
-      new Date(b.dateStreamed).getTime() - new Date(a.dateStreamed).getTime()
-  );
-};
-
 export const recentStreamsData: Stream[] = generateRandomStreams(50);
 
 // Calculate key metrics
@@ -188,21 +204,6 @@ export const keyMetrics = {
   topArtist: topSongsData[0].artist,
 };
 
-// Function to generate random avatar URL
-const getRandomAvatar = (userId: string) => {
-  const styles = [
-    "adventurer",
-    "adventurer-neutral",
-    "avataaars",
-    "big-ears",
-    "big-smile",
-    "bottts",
-    "croodles",
-    "fun-emoji",
-  ];
-  const randomStyle = styles[Math.floor(Math.random() * styles.length)];
-  return `https://api.dicebear.com/7.x/${randomStyle}/svg?seed=${userId}`;
-};
 // Sample user data
 export const allUsers = Array.from({ length: 8 }).map((_, index) => ({
   id: `user-${index + 1}`,
@@ -239,3 +240,21 @@ export const streamingData = [
   { name: "Electronic", streams: 2900, growth: 18 },
   { name: "R&B", streams: 2600, growth: 12 },
 ];
+
+// Simulate data for inactive and removed users based on active users
+export const userStatusData = enhancedUserData.map((item) => {
+  const activeUsers = item.activeUsers;
+  // Calculate inactive users as ~20-30% of active users with some variation
+  const inactiveUsers = Math.round(activeUsers * (0.2 + Math.random() * 0.1));
+  // Calculate removed accounts as ~5-10% of active users with some variation
+  const removedAccounts = Math.round(
+    activeUsers * (0.05 + Math.random() * 0.05)
+  );
+
+  return {
+    month: item.month,
+    activeUsers,
+    inactiveUsers,
+    removedAccounts,
+  };
+});

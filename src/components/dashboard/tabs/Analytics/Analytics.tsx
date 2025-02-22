@@ -1,9 +1,10 @@
 import { CardContent } from "@/components/ui/card";
 import Card3D from "@/components/ui/Card3d";
 import { TabsContent } from "@/components/ui/tabs";
-import { enhancedUserData, streamingData } from "@/data/mockData";
+import { streamingData, userStatusData } from "@/data/mockData";
 import LineChartGraph from "@/components/charts/LineChart";
 import GenericChart from "@/components/charts/GenericChart";
+import { genreConfigs, userStatusConfigs } from "@/lib/constants";
 
 interface StreamingData {
   name: string;
@@ -12,60 +13,22 @@ interface StreamingData {
 }
 
 const AnalyticsTab = () => {
-  // Calculate actual month-over-month growth rates
-  const dataWithGrowth = enhancedUserData.map((item, index, arr) => {
-    if (index === 0) {
-      return { ...item, growthRate: 0 };
-    }
-    const previousMonth = arr[index - 1].activeUsers;
-    const currentMonth = item.activeUsers;
-    const growthRate = ((currentMonth - previousMonth) / previousMonth) * 100;
-
-    return {
-      ...item,
-      growthRate: parseFloat(growthRate.toFixed(1)),
-    };
-  });
-
-  // Configuration for user engagement line chart
-  const userEngagementConfigs = [
-    {
-      dataKey: "activeUsers",
-      stroke: "#0ea5e9",
-      name: "Monthly Active Users",
-    },
-    {
-      dataKey: "growthRate",
-      stroke: "#14b8a6",
-      name: "Growth Rate %",
-    },
-  ];
-
-  // Configuration for genre performance bar chart
-  const genreConfigs = [
-    {
-      dataKey: "streams",
-      stroke: "#0ea5e9",
-      name: "Streams",
-    },
-  ];
-
   return (
     <TabsContent value="analytics" className="space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* User Engagement Chart */}
+        {/* User Status Chart */}
         <Card3D className="lg:col-span-2">
           <CardContent className="p-6">
             <h2
               className="text-lg font-semibold mb-4 bg-gradient-to-r from-sky-600 to-teal-600 
                 dark:from-sky-400 dark:to-teal-400 bg-clip-text text-transparent"
             >
-              User Growth & Engagement
+              User Account Status
             </h2>
             <div className="h-[300px] relative z-10">
               <LineChartGraph
-                data={dataWithGrowth}
-                lineConfigs={userEngagementConfigs}
+                data={userStatusData}
+                lineConfigs={userStatusConfigs}
                 areaChart={true}
               />
             </div>
