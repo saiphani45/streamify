@@ -95,5 +95,4 @@ const MetricCards = () => {
     </div>
   );
 };
-
 export default MetricCards;

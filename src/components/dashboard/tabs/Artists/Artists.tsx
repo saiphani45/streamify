@@ -63,7 +63,7 @@ const ArtistsTab = () => {
 
           {/* Artists Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredArtists.map((artist) => (
+            {filteredArtists.map((artist: any) => (
               <Card3D
                 key={artist.id}
                 className="hover:scale-[1.02] transition-transform backdrop-blur-lg"
@@ -91,24 +91,26 @@ const ArtistsTab = () => {
                         {artist.name}
                       </h3>
                       <p className="text-sm text-sky-600/60 dark:text-sky-400/60 mt-1">
-                        {(artist.monthlyListeners / 1000000).toFixed(1)}M
+                        {(artist?.monthlyListeners / 1000000).toFixed(1)}M
                         monthly listeners
                       </p>
                       <p className="text-sm text-sky-600/60 dark:text-sky-400/60 mt-1">
-                        {(artist.totalStreams / 1000000000).toFixed(1)}B total
+                        {(artist?.totalStreams / 1000000000).toFixed(1)}B total
                         streams
                       </p>
                       {artist.genres && (
                         <div className="flex flex-wrap gap-2 mt-2">
-                          {artist.genres.slice(0, 2).map((genre, index) => (
-                            <span
-                              key={index}
-                              className="px-2 py-0.5 text-xs rounded-full bg-sky-100 dark:bg-sky-900/50 
+                          {artist.genres
+                            .slice(0, 2)
+                            .map((genre: any, index: any) => (
+                              <span
+                                key={index}
+                                className="px-2 py-0.5 text-xs rounded-full bg-sky-100 dark:bg-sky-900/50 
                                 text-sky-600 dark:text-sky-400"
-                            >
-                              {genre}
-                            </span>
-                          ))}
+                              >
+                                {genre}
+                              </span>
+                            ))}
                           {artist.genres.length > 2 && (
                             <span className="text-xs text-sky-600/60 dark:text-sky-400/60">
                               +{artist.genres.length - 2} more
@@ -141,7 +143,7 @@ const ArtistsTab = () => {
         onClose={handleCloseViewModal}
       />
 
-      {/* Add Artist Modal */}
+      {/* Artist Modal */}
       <AddArtistDialog
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}

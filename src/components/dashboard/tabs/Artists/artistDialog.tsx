@@ -59,7 +59,7 @@ const ArtistDialog = ({ artist, isOpen, onClose }: ArtistDialogProps) => {
                 className="text-2xl font-bold bg-gradient-to-r from-sky-600 to-teal-600 
                   dark:from-sky-400 dark:to-teal-400 bg-clip-text text-transparent"
               >
-                {(artist.monthlyListeners / 1000000).toFixed(1)}M
+                {((artist as any).monthlyListeners / 1000000).toFixed(1)}M
               </p>
             </div>
 
@@ -71,7 +71,7 @@ const ArtistDialog = ({ artist, isOpen, onClose }: ArtistDialogProps) => {
                 className="text-2xl font-bold bg-gradient-to-r from-sky-600 to-teal-600 
                   dark:from-sky-400 dark:to-teal-400 bg-clip-text text-transparent"
               >
-                {(artist.totalStreams / 1000000000).toFixed(1)}B
+                {((artist as any).totalStreams / 1000000000).toFixed(1)}B
               </p>
             </div>
 

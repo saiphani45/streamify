@@ -1,16 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { artists as initialArtists } from "@/data/mockData";
-
-interface Artist {
-  id: string;
-  name: string;
-  image: string;
-  monthlyListeners?: number;
-  totalStreams?: number;
-  genres?: string[];
-  topSongs?: string[];
-  joinedDate?: string;
-}
+import { Artist } from "@/types";
 
 interface ArtistContextType {
   artists: Artist[];

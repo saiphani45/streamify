@@ -13,8 +13,8 @@ export interface Artist {
   id: string;
   name: string;
   image: string;
-  monthlyListeners: number;
-  totalStreams: number;
+  monthlyListeners?: number;
+  totalStreams?: number;
   genres?: string[];
   topSongs?: string[];
   joinedDate?: string;
