@@ -4,7 +4,7 @@ import { TabsContent } from "@/components/ui/tabs";
 import { streamingData, userStatusData } from "@/data/mockData";
 import LineChartGraph from "@/components/charts/LineChartGraph";
 import { genreConfigs, userStatusConfigs } from "@/lib/constants";
-import GenericChart from "@/components/charts/GenericChart";
+import GenericChartGraph from "@/components/charts/GenericChartGraph";
 interface StreamingData {
   name: string;
   streams: number;
@@ -47,7 +47,7 @@ const AnalyticsTab = () => {
               Genre Performance
             </h2>
             <div className="h-[300px] relative z-10">
-              <GenericChart
+              <GenericChartGraph
                 data={streamingData}
                 configs={genreConfigs}
                 type="bar"

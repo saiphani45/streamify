@@ -154,7 +154,7 @@ export const streamingData = [
   { name: "Pop", streams: 1000000, growth: 15 },
   { name: "Hip Hop", streams: 800000, growth: 22 },
   { name: "R&B", streams: 600000, growth: 12 },
-  { name: "Rock", streams: 500000, growth: 8 },
+  { name: "Rock", streams: 500000, growth: -8 },
   { name: "Electronic", streams: 400000, growth: 18 },
 ];
 

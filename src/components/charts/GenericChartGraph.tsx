@@ -31,7 +31,7 @@ interface GenericChartProps {
   dualAxis?: boolean;
 }
 
-const GenericChart = ({
+const GenericChartGraph = ({
   data,
   configs,
   type = "bar",
@@ -161,4 +161,4 @@ const GenericChart = ({
   );
 };
 
-export default GenericChart;
+export default GenericChartGraph;
