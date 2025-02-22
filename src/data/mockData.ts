@@ -1,4 +1,4 @@
-import { UserGrowth, Revenue, Song, Stream, Artist } from "../types";
+import { Revenue, Song, Stream, Artist } from "../types";
 
 // Function to generate random avatar URL
 const getRandomAvatar = (userId: string) => {
@@ -103,7 +103,7 @@ export const userGrowthData = [
   { month: "2024-10", totalUsers: 51000, activeUsers: 38250 },
   { month: "2024-11", totalUsers: 55000, activeUsers: 41250 },
   { month: "2024-12", totalUsers: 58000, activeUsers: 43500 },
-  { month: "2025-01", totalUsers: 61000, activeUsers: 45750 }
+  { month: "2025-01", totalUsers: 61000, activeUsers: 45750 },
 ];
 // Revenue data with realistic proportions
 export const revenueData: Revenue = {
